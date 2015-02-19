@@ -1,0 +1,14 @@
+{
+  "name": "Lyrics Player",
+  "description": "Music player with the ability to display timed lyrics using LRC files.",
+  "launch_path": "/index.html",
+  "icons": {
+    "64": "img/icon.png",
+    "128": "img/icon.png"
+  },
+  "developer": {
+    "name": "Matusinka Roland",
+    "url": "http://github.com/mrolcsi"
+  },
+  "default_locale": "en"
+}

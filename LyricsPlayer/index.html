@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="css/player.css">
+    <link href="gaia/seekbars.css" rel="stylesheet" type="text/css">
+
+    <title>Lyrics Player</title>
+</head>
+<body>
+<img id="coverArt" width="100%" src="img/nocover.png"/>
+
+<table>
+    <tbody>
+    <tr>
+        <td>
+            <section class="playerLabel" id="title"><b>Title</b></section>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <section class="playerLabel" id="albumArtist">Artist - Album</section>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<table>
+    <tbody>
+    <tr>
+        <td>
+            <button id="openFile">Open</button>
+        </td>
+        <td rowspan="2" class="centerAligned">
+            <button id="playPause">Play|Pause</button>
+        </td>
+        <td class="rightAligned">
+            <button id="editLyrics">Edit</button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <section id="elapsedTime">00:00</section>
+        </td>
+        <td class="rightAligned">
+            <section id="remainingTime">-99:99</section>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<section>
+    <div>
+        <input type="range" id="progress" title="Progress">
+    </div>
+</section>
+
+</body>
+</html>
