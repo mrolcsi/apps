@@ -1,0 +1,14 @@
+{
+  "name": "ChatUI",
+  "description": "Layout demo",
+  "launch_path": "/index.html",
+  "icons": {
+    "512": "/img/icon-512.png",
+    "128": "/img/icon-128.png"
+  },
+  "developer": {
+    "name": "Matusinka Roland",
+    "url": "http://github.com/mrolcsi"
+  },
+  "default_locale": "en"
+}
