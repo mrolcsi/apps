@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <title>Networking Demo</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="style/buttons.css" rel="stylesheet" type="text/css">
+    <link href="style/headers.css" rel="stylesheet" type="text/css">
+    <link href="style/layout.css" rel="stylesheet" type="text/css">
+    <link href="style/input_areas.css" rel="stylesheet" type="text/css">
+
+    <script src="script/app.js"></script>
+</head>
+<body>
+<section role="region" class="gaia-list fit scroll sticky">
+    <header>
+        <h1>Networking Demo</h1>
+    </header>
+
+    <article>
+        <header>Send Data</header>
+        <ul>
+            <li>
+                <p><input type="text" placeholder="To who?" id="owner"></p>
+            </li>
+            <li>
+                <p><input type="text" placeholder="What?" id="data"></p>
+            </li>
+            <li>
+
+                <div class="fit">
+                    <p>
+                        <button id="send" class="recommend" onclick="sendData()">Send</button>
+                        <button id="get" onclick="getData()">Get</button>
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </article>
+
+    <article>
+        <ul id="dataList">
+            <!-- Received data here -->
+        </ul>
+    </article>
+
+</section>
+</body>
+</html>
