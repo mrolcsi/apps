@@ -3,8 +3,8 @@
   "description": "Music player with the ability to display timed lyrics using LRC files.",
   "launch_path": "/index.html",
   "icons": {
-    "64": "img/icon.png",
-    "128": "img/icon.png"
+    "64": "img/icon-64.png",
+    "128": "img/icon-128.png"
   },
   "developer": {
     "name": "Matusinka Roland",
