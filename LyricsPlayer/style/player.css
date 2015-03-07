@@ -1,17 +1,7 @@
-section.playerLabel {
-    text-align: center;
-    vertical-align: middle;
-}
-
-section[role="slider"] {
-    width: 100%;
-    margin: 6px;
-}
-
 #coverArt {
     position: relative;
     width: 100%; /* desired width */
-    background-image: url(../img/nocover.png);
+    background-image: url('../img/covers/nocover.png');
     background-size: 100%;
 }
 
@@ -31,39 +21,7 @@ section[role="slider"] {
     right: 0;
 }
 
-.lyricLine {
-    padding: 12px;
-    background-color: rgba(128, 128, 128, 0.5);
-    color: rgba(255, 255, 255, 0.8);
-    font-size: large;
-    width: -moz-max-content;
-    margin: 0 auto;
-}
-
 #middleLine {
     background-color: rgba(128, 128, 128, 0.7);
     color: #ffffff;
-}
-
-table {
-    width: 100%;
-}
-
-td {
-    vertical-align: middle;
-}
-
-.rightAligned {
-    text-align: right;
-}
-
-.centerAligned {
-    text-align: center;
-}
-
-audio {
-    width: 100%;
-    background-color: transparent;
-    margin-left: 0;
-    margin-right: 0;
 }

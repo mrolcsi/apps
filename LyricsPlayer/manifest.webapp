@@ -1,10 +1,13 @@
 {
   "name": "Lyrics Player",
   "description": "Music player with the ability to display timed lyrics using LRC files.",
-  "launch_path": "/index.html",
+  "launch_path": "/filebrowser.html",
   "icons": {
     "64": "img/icon-64.png",
     "128": "img/icon-128.png"
+  },
+  "permissions": {
+    "device-storage:music": {"access": "readonly"}
   },
   "developer": {
     "name": "Matusinka Roland",

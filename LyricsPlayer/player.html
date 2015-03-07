@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="style/app.css">
+    <link rel="stylesheet" type="text/css" href="style/player.css">
+    <link href="style/gaia/seekbars.css" rel="stylesheet" type="text/css">
+    <link href="style/gaia/icons.css" rel="stylesheet" type="text/css">
+
+    <script src="script/jquery-2.1.3.min.js"></script>
+    <script src="script/player.js"></script>
+
+    <title>Lyrics Player</title>
+</head>
+<body>
+<div id="coverArt">
+    <div id="lyrics">
+        <p id="topLine" class="lyricLine centerAligned">Top Line</p>
+
+        <p id="middleLine" class="lyricLine centerAligned">Very Very Very Very Very Looooooooooong Middle Line</p>
+
+        <p id="bottomLine" class="lyricLine centerAligned">Bottom Line</p>
+    </div>
+</div>
+
+<table>
+    <tbody>
+    <tr>
+        <td>
+            <section class="playerLabel" id="title" style="font-weight: bold">Title</section>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <section class="playerLabel" id="artistAlbum">Artist - Album</section>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<table>
+    <tbody>
+    <tr>
+        <td>
+            <section id="elapsedTime">00:00</section>
+        </td>
+        <td rowspan="2" class="centerAligned">
+            <img id="playPause" width="64" height="64" src="img/player_play.png" class="gaia-icon">
+        </td>
+        <td class="rightAligned">
+            <section id="remainingTime">-99:99</section>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<audio preload="metadata" controls src=""></audio>
+
+<section>
+    <div>
+        <input type="range" id="progress" title="Progress">
+    </div>
+</section>
+
+</body>
+</html>
