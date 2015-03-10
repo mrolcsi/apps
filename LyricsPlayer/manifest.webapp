@@ -13,5 +13,6 @@
     "name": "Matusinka Roland",
     "url": "http://github.com/mrolcsi"
   },
-  "default_locale": "en"
+  "default_locale": "en",
+  "orientation": ["portrait"]
 }
