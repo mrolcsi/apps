@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="style/app.css">
+    <link rel="stylesheet" href="style/layout.css">
+    <link rel="stylesheet" href="style/headers.css">
+    <link rel="stylesheet" href="style/buttons.css">
+    <link rel="stylesheet" href="style/input_areas.css">
+
+    <script src="script/jquery-1.11.2.min.js"></script>
+    <script src="script/app.js"></script>
+    <script src="script/persona.js"></script>
+    <script src="script/auth.js"></script>
+
+    <title></title>
+</head>
+<body role="application">
+<section role="region" class="gaia-list fit scroll sticky">
+    <header>
+        <menu type="toolbar">
+            <button data-icon="user" onclick="navigator.id.request()"></button>
+        </menu>
+        <h1>Persona Demo</h1>
+
+        <h2></h2>
+    </header>
+
+    <article>
+        <header>Login</header>
+        <ul>
+            <li>
+                <p><input type="email" placeholder="E-mail" id="email"></p>
+            </li>
+            <li>
+                <p><input type="text" placeholder="Full name" id="fullName"></p>
+            </li>
+            <li>
+                <p><input type="text" placeholder="Nick name" id="nickName"></p>
+            </li>
+            <li>
+                <div class="fit">
+                    <p>
+                        <button id="save" class="recommend" onclick="save()">Save</button>
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </article>
+</section>
+
+</body>
+</html>
