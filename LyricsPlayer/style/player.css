@@ -25,3 +25,7 @@
     background-color: rgba(128, 128, 128, 0.7);
     color: #ffffff;
 }
+
+td {
+    vertical-align: bottom;
+}

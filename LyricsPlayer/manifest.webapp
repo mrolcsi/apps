@@ -1,7 +1,7 @@
 {
   "name": "Lyrics Player",
   "description": "Music player with the ability to display timed lyrics using LRC files.",
-  "launch_path": "/musicbrowser.html",
+  "launch_path": "/player.html",
   "type": "privileged",
   "icons": {
     "64": "img/icon-64.png",

@@ -8,6 +8,12 @@ var musicStorage;
 var $ulFileList;
 
 $(document).ready(function () {
+    //onClick listeners
+    $("#back").click(function () {
+        window.history.back();
+    });
+
+//load songs
     musicStorage = navigator.getDeviceStorage('music');
     $ulFileList = $("#fileList");
 
@@ -47,7 +53,7 @@ $(document).ready(function () {
                     //} else {
                     //    console.error("img is null! id = " + id);
                     //}
-                });
+            });
             }, function (error) {
                 console.log("> parseAudioMetadata: " + error);
             });
@@ -55,9 +61,10 @@ $(document).ready(function () {
 
         if (!this.done) {
             this.continue();
-        }
     }
-});
+    }
+})
+;
 
 function addToList(metadata) {
     /*
