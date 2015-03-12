@@ -21,22 +21,36 @@ $(document).ready(function () {
             //if the file is actually in the music folder
             console.log("+ valid file: " + file.name);
 
-            id3(file, function (err, tags) {
-                // tags now contains your ID3 tags
-                console.log("> load tag: " + file.name);
+            parseAudioMetadata(file, function (metadata) {
+                addToList(metadata);
 
-                if (tags) {
-                    addToList(file.name, tags);
-                }
+                var fileinfo = {
+                    name: file.name,
+                    blob: file,
+                    metadata: metadata
+                };
+
+                getThumbnailURL(fileinfo, function (blobUrl) {
+                    var id = encodeRFC5987ValueChars(fileinfo.name);
+
+                    var $img = document.getElementById(id);
+
+                    if ($img) {
+                        $img.src = blobUrl;
+                    } else {
+                        console.error("$img is null! -> id = " + id);
+                    }
+
+                    //var $img = $(id);
+                    //if ($img) {
+                    //    $img.attr("src", blobUrl);
+                    //} else {
+                    //    console.error("img is null! id = " + id);
+                    //}
+                });
+            }, function (error) {
+                console.log("> parseAudioMetadata: " + error);
             });
-
-            // D E P R E C A T E D
-            //parseAudioMetadata(file, addToList, function (message) {
-            //    console.log("> PARSE ERROR: " + message);
-            //});
-            //getThumbnailURL(file, function (url) {
-            //    $("#" + encodeRFC5987ValueChars(file.name)).attr("src", url);
-            //});
         }
 
         if (!this.done) {
@@ -45,16 +59,16 @@ $(document).ready(function () {
     }
 });
 
-function addToList(url, tags) {
+function addToList(metadata) {
     /*
      <li>
      ....<img src="[thumbnailUrl]">
-     ....<a href="player.html?filename=[path]">
-     ........<p class="fit">
+     ....<p class="fit">
+     ........<a href="player.html?filename=[path]">
      ............<b>[Title]</b><br/>
      ............by [Artist]
-     ........</p>
-     ....</a>
+     ........</a>
+     ....</p>
      </li>
      */
 
@@ -62,32 +76,19 @@ function addToList(url, tags) {
     var $li = $(document.createElement("li"));
 
     var $img = $(document.createElement("img"));
-    $img.attr("id", encodeRFC5987ValueChars(url));
-
-    if (tags.v2.image) {
-        var arrayBuffer = tags.v2.image.data;
-        var bytes = new Uint8Array(arrayBuffer);
-        var blob = new Blob([bytes.buffer]);
-
-        var reader = new FileReader();
-        reader.onload = function (e) {
-            $img.attr("src", e.target.result);
-        };
-        reader.readAsDataURL(blob);
-    }
-    //$(img).attr("src",image);
-
-    var $a = $(document.createElement("a"));
-    $a.attr("href", "player.html?filename=" + encodeRFC5987ValueChars(url));
+    $img.attr("id", encodeRFC5987ValueChars(metadata.filename));
 
     var $p = $(document.createElement("p"));
     $p.addClass("fit");
-    $p.html("<b>" + tags.title + "</b><br/>by <i>" + tags.artist + "</i>");
+
+    var $a = $(document.createElement("a"));
+    $a.attr("href", "player.html?filename=" + encodeRFC5987ValueChars(metadata.filename));
+    $a.html("<b>" + metadata.title + "</b><br/>by <i>" + metadata.artist + "</i>");
 
     //put elements together
     $li.append($img);
-    $li.append($a);
-    $a.append($p);
+    $li.append($p);
+    $p.append($a);
 
     $ulFileList.append($li);
 }

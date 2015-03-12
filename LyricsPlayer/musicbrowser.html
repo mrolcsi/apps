@@ -11,10 +11,9 @@
     <link href="style/gaia/headers.css" rel="stylesheet" type="text/css">
     <link href="style/gaia/layout.css" rel="stylesheet" type="text/css">
 
-    <script src="script/jquery-2.1.3.min.js"></script>
-    <!--<script src="script/media/metadata_scripts.js"></script>-->
-    <!--<script src="script/media/async_storage.js"></script>-->
-    <script src="script/media/id3.js"></script>
+    <script src="script/lib/jquery-2.1.3.min.js"></script>
+    <script src="script/lib/metadata_scripts.js"></script>
+    <script src="script/lib/async_storage.js"></script>
     <script src="script/musicbrowser.js"></script>
 
     <title>Select Music</title>
@@ -22,10 +21,12 @@
 <body>
 <section role="region" class="vbox fit scroll">
     <header>
+        <a href="#drawer"><span class="icon icon-back" onclick="window.history.back()">show sidebar</span></a>
+
         <h1>Select Music</h1>
     </header>
     <section class="gaia-list fit scroll sticky">
-        <header>Browse Music</header>
+        <header>Available songs</header>
         <article>
             <ul id="fileList">
                 <!-- list of files & dirs -->

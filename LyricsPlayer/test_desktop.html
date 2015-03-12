@@ -1,23 +1,43 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <script src="script/lib/metadata_scripts.js"></script>
+    <script src="script/lib/async_storage.js"></script>
+
     <title>Test</title>
 </head>
 <body>
-<!-- Make a file input for you to select an MP3 -->
-<input type="file">
-<!-- Include ID3.js -->
-<script src="script/media/id3.js"></script>
+<input type="file"><br/>
+<img id="cover" src="">
+
 <script type="text/javascript">
     document.querySelector('input[type="file"]').onchange = function (e) {
         /*
          Pass the File instance to ID3.js
          You could iterate over this.files to handle many at once
          */
-        id3(this.files[0], function (err, tags) {
-            console.log(err, tags);
-        });
-    }
+
+        var file = this.files[0];
+        parseAudioMetadata(file, function (metadata) {
+            alert(metadata.artist + " - " + metadata.title);
+
+            var fileinfo = {
+                name: file.name,
+                blob: file,
+                metadata: metadata
+            };
+
+            getThumbnailURL(fileinfo, function (blobUrl) {
+                alert("Image URL = " + blobUrl);
+                document.getElementById("cover").src = blobUrl;
+            });
+        }, function (error) {
+            alert(error);
+        })
+
+    };
 </script>
+
 </body>
 </html>

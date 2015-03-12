@@ -519,7 +519,6 @@ function parseAudioMetadata(blob, metadataCallback, errorCallback) {
     metadata[RATED] = metadata[PLAYED] = 0;
     metadata[FAVORITED] = false;
     metadata[FILENAME] = filename;
-    metadata[IMAGE] = new Image();
 
     // If the blob has a name, use that as a default title in case
     // we can't find one in the file
@@ -789,7 +788,7 @@ function parseAudioMetadata(blob, metadataCallback, errorCallback) {
                     console.warn('Error parsing mp3 metadata tag', tagid, ':', e);
                 }
 
-                console.log("> Read tag: " + tagname + " = '" + tagvalue + "'");
+                //console.log("> Read tag: " + tagname + " = '" + tagvalue + "'");
 
                 // Make sure we're at the start of the next tag before continuing
                 id3.index = nexttag;
@@ -1259,9 +1258,25 @@ function getThumbnailURL(fileinfo, callback) {
             getImage(fileinfo.blob);
         }
         else {                     // this is the normal case
-            musicdb.getFile(fileinfo.name, function (file) {
+            getFile(fileinfo.name, function (file) {
                 getImage(file);
             });
+        }
+
+        function getFile(filename, callback, errback) {
+            var storage = navigator.getDeviceStorage("Music");
+            var getRequest = storage.get(filename);
+            getRequest.onsuccess = function () {
+                callback(getRequest.result);
+            };
+            getRequest.onerror = function () {
+                var errmsg = getRequest.error && getRequest.error.name;
+                if (errback) {
+                    errback(errmsg);
+                } else {
+                    console.error('Metadata.getFile:', errmsg);
+                }
+            };
         }
 
         function getImage(file) {

@@ -6,3 +6,7 @@ a {
 a:hover {
     color: #F97C17;
 }
+
+header h1 {
+    font-size: medium;
+}
