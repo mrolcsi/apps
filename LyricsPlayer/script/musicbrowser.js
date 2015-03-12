@@ -37,7 +37,8 @@ $(document).ready(function () {
                 };
 
                 getThumbnailURL(fileinfo, function (blobUrl) {
-                    var id = encodeRFC5987ValueChars(fileinfo.name);
+                    //var id = encodeRFC5987ValueChars(fileinfo.name);
+                    var id = encodeURIComponent(fileinfo.name);
 
                     var $img = document.getElementById(id);
 
@@ -53,7 +54,7 @@ $(document).ready(function () {
                     //} else {
                     //    console.error("img is null! id = " + id);
                     //}
-            });
+                });
             }, function (error) {
                 console.log("> parseAudioMetadata: " + error);
             });
@@ -61,7 +62,7 @@ $(document).ready(function () {
 
         if (!this.done) {
             this.continue();
-    }
+        }
     }
 })
 ;
@@ -83,13 +84,15 @@ function addToList(metadata) {
     var $li = $(document.createElement("li"));
 
     var $img = $(document.createElement("img"));
-    $img.attr("id", encodeRFC5987ValueChars(metadata.filename));
+    //$img.attr("id", encodeRFC5987ValueChars(metadata.filename));
+    $img.attr("id", encodeURIComponent(metadata.filename));
 
     var $p = $(document.createElement("p"));
     $p.addClass("fit");
 
     var $a = $(document.createElement("a"));
-    $a.attr("href", "player.html?filename=" + encodeRFC5987ValueChars(metadata.filename));
+    //$a.attr("href", "player.html?filename=" + encodeRFC5987ValueChars(metadata.filename));
+    $a.attr("href", "player.html?filename=" + encodeURIComponent(metadata.filename));
     $a.html("<b>" + metadata.title + "</b><br/>by <i>" + metadata.artist + "</i>");
 
     //put elements together
