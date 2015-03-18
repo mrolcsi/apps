@@ -2,13 +2,16 @@
  * Created by Roland on 2015.03.05..
  */
 
-var musicStorage;
-
+//UI elements
 var $audio; //simple DOM, not jQuery!
 var $elapsedTime;
 var $remainingTime;
 var $seekBar;
-var $durationSet = false;
+
+//global variables
+var musicStorage;
+var durationSet = false;
+var lyrics; // [{time:double, text:string},...]
 
 $(document).ready(function () {
     //globals
@@ -36,9 +39,9 @@ $(document).ready(function () {
     $audio.addEventListener("playing", audioEventPlaying);
     $audio.addEventListener("timeupdate", audioEventUpdate);
     $audio.addEventListener("canplaythrough", function (e) {
-        if (!$durationSet) {
+        if (!durationSet) {
             console.log("Get duration: " + e.currentTarget.duration);
-            $durationSet = true;
+            durationSet = true;
             $remainingTime.text("-" + formatDuration(e.currentTarget.duration));
             $seekBar.attr("max", e.currentTarget.duration)
         }
@@ -71,7 +74,14 @@ $(document).ready(function () {
                     var $coverArt = document.getElementById("coverArt");
                     $coverArt.style.background = "url(" + blobUrl + ")";
                     $coverArt.style.backgroundSize = "100%";
-                })
+                });
+
+                getLyrics(metadata, function (result) {
+                    lyrics = result;
+                }, function () {
+                    alert("Error getting lyrics.");
+                });
+
             }, function (error) {
                 console.error("parseAudioMetadata error: " + error)
             }
