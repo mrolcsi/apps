@@ -1,20 +1,12 @@
 section.playerLabel {
     text-align: center;
     vertical-align: middle;
+    padding: 6px;
 }
 
 section[role="slider"] {
     width: 100%;
     margin: 6px;
-}
-
-.lyricLine {
-    padding: 12px;
-    background-color: rgba(128, 128, 128, 0.5);
-    color: rgba(255, 255, 255, 0.8);
-    font-size: large;
-    width: -moz-max-content;
-    margin: 0 auto;
 }
 
 table {

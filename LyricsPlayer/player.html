@@ -20,65 +20,55 @@
     <title>Lyrics Player</title>
 </head>
 <body>
-<section role="region" class="vbox scroll fit">
+<section class="fit scroll">
     <div id="coverArt">
-        <div id="lyrics">
-            <p id="topLine" class="lyricLine centerAligned fit">Top Line</p>
-
-            <p id="middleLine" class="lyricLine centerAligned fit">Very Very Very Very Very Looooooooooong Middle
-                Line</p>
-
-            <p id="bottomLine" class="lyricLine centerAligned fit">Bottom Line</p>
-        </div>
+        <table id="lyrics">
+            <tr>
+                <td>
+                    <p>Top Line</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p id="middleLine">Very Very Very Very Very Looooooooooong Middle Line</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>Bottom Line</p>
+                </td>
+            </tr>
+        </table>
     </div>
 
-    <table>
-        <tbody>
-        <tr>
-            <td>
-                <section class="playerLabel" id="title" style="font-weight: bold">Title</section>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <section class="playerLabel" id="artistAlbum">Artist - Album</section>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+    <audio id="audio" preload="auto" src=""></audio>
+
+    <section class="playerLabel" id="title" style="font-weight: bold">Title</section>
+    <section class="playerLabel" id="artistAlbum">Artist - Album</section>
 
     <table>
         <tbody>
         <tr>
-            <td>
+            <td width="64px">
                 <a href="musicbrowser.html">
-                    <img id="openFile" width="32" height="32" src="img/player_open.png"
-                         class="gaia-icon">
+                    <img id="openFile" width="32" height="32" src="img/player_open.png" class="gaia-icon">
                 </a>
-            </td>
-            <td rowspan="2" class="centerAligned">
-                <img id="playPause" width="64" height="64" src="img/player_play.png" class="gaia-icon icon-media-play">
-            </td>
-            <td class="rightAligned"><!-- placeholder --></td>
-        </tr>
-        <tr>
-            <td>
+                <br/>
                 <section id="elapsedTime">00:00</section>
             </td>
-            <td class="rightAligned">
+            <td class="centerAligned">
+                <img id="playPause" width="64" height="64" src="img/player_play.png" class="gaia-icon icon-media-play">
+            </td>
+            <td class="rightAligned" width="64px">
+                <img width="32" height="32" src="img/null.png">
                 <section id="remainingTime">-99:99</section>
             </td>
         </tr>
         </tbody>
     </table>
 
-    <audio id="currentSong" preload="auto" controls src=""></audio>
+    <input type="range" id="seekBar" title="Progress" value="0">
 
-    <section>
-        <div>
-            <input type="range" id="progress" title="Progress">
-        </div>
-    </section>
 </section>
 
 </body>

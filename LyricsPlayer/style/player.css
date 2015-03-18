@@ -1,31 +1,29 @@
 #coverArt {
-    position: relative;
-    width: 100%; /* desired width */
-    background-image: url('../img/covers/nocover.png');
+    width: 360px;
+    height: 360px;
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+
+    background-image: url(../img/covers/nocover.png);
     background-size: 100%;
 }
 
-#coverArt:before {
-    content: "";
-    display: block;
-    padding-top: 100%;
+#lyrics td {
+    vertical-align: middle;
+    font-size: large;
+    width: -moz-max-content;
 }
 
-#lyrics {
-    display: inline-block;
-    vertical-align: middle;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
+#lyrics p {
+    width: auto;
+    padding: 12px;
+    background-color: rgba(128, 128, 128, 0.5);
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0 auto;
 }
 
 #middleLine {
-    background-color: rgba(128, 128, 128, 0.7);
-    color: #ffffff;
-}
-
-td {
-    vertical-align: bottom;
+    background-color: rgba(128, 128, 128, 0.7) !important;
+    color: #ffffff !important;
 }

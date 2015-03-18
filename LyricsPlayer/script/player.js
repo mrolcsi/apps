@@ -4,19 +4,21 @@
 
 var musicStorage;
 
-var $audio;
+var $audio; //simple DOM, not jQuery!
 var $elapsedTime;
 var $remainingTime;
-var $progressBar;
+var $seekBar;
+var $durationSet = false;
 
 $(document).ready(function () {
     //globals
     musicStorage = navigator.getDeviceStorage('music');
 
-    $audio = document.getElementById("currentSong");
+    $audio = document.getElementById("audio");
     $elapsedTime = $("#elapsedTime");
     $remainingTime = $("#remainingTime");
-    $progressBar = $("#progress");
+    $seekBar = $("#seekBar");
+    $seekBar.val(0);
 
     //noinspection JSSuspiciousNameCombination
     //set cover art dimensions
@@ -26,6 +28,21 @@ $(document).ready(function () {
 
     //set events
     $("#playPause").click(playPause);
+    $seekBar.on("input", seek);
+
+    //set audio events
+    $audio.addEventListener("ended", audioEventEnded);
+    $audio.addEventListener("pause", audioEventPaused);
+    $audio.addEventListener("playing", audioEventPlaying);
+    $audio.addEventListener("timeupdate", audioEventUpdate);
+    $audio.addEventListener("canplaythrough", function (e) {
+        if (!$durationSet) {
+            console.log("Get duration: " + e.currentTarget.duration);
+            $durationSet = true;
+            $remainingTime.text("-" + formatDuration(e.currentTarget.duration));
+            $seekBar.attr("max", e.currentTarget.duration)
+        }
+    });
 
     //get which song to load
     var param = location.search.split('filename=')[1];
@@ -37,7 +54,7 @@ $(document).ready(function () {
         var musicFile = this.result;
         console.log("File loaded.");
 
-        $("#currentSong").attr("src", URL.createObjectURL(musicFile));
+        $("#audio").attr("src", URL.createObjectURL(musicFile));
 
         parseAudioMetadata(musicFile, function (metadata) {
                 console.log("Metadata loaded.");
@@ -63,14 +80,11 @@ $(document).ready(function () {
     request.onerror = function () {
         console.warn("Unable to get the file: " + this.error);
     };
-})
-;
+});
 
 function printMetadata(metadata) {
     $("#title").html("<b>" + metadata.title + "</b>");
     $("#artistAlbum").text(metadata.artist + " - " + metadata.album);
-
-    $remainingTime.text("-" + formatDuration($audio.duration));
 }
 
 function playPause() {
@@ -78,15 +92,45 @@ function playPause() {
 
     if ($audio.paused) {
         $audio.play();
-        $("#playPause").attr("src", "/img/player_pause.png");
     } else {
         $audio.pause();
-        $("#playPause").attr("src", "/img/player_play.png");
     }
 }
 
 function seek() {
+    $audio.currentTime = $seekBar.val();
+}
+
+//audio events
+function audioEventEnded() {
+    //reset seekbar
+    $seekBar.val("0");
+    //reset elapsed time
+    $elapsedTime.text(formatDuration(0));
+    //reset remaining time
+    $remainingTime.text("-" + formatDuration($audio.duration));
+    //reset lyrics
+}
+
+function audioEventPaused() {
+    //show play button
+    $("#playPause").attr("src", "/img/player_play.png");
+}
+
+function audioEventPlaying() {
+    //show pause button
+    $("#playPause").attr("src", "/img/player_pause.png");
+}
+
+function audioEventUpdate() {
     //TODO
+    //update elapsed time
+    $elapsedTime.text(formatDuration($audio.currentTime));
+    //update remaining time
+    $remainingTime.text("-" + formatDuration($audio.duration - $audio.currentTime));
+    //update seekbar
+    $seekBar.val($audio.currentTime);
+    //update lyrics
 }
 
 //media utils
