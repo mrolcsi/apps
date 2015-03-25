@@ -8,10 +8,17 @@ var $elapsedTime;
 var $remainingTime;
 var $seekBar;
 
+var $topLine;
+var $middleLine;
+var $bottomLine;
+
 //global variables
 var musicStorage;
 var durationSet = false;
-var lyrics; // [{time:double, text:string},...]
+var timeIndex = []; // [i] = time;
+var lyrics = {}; //[i] = {time, text}
+var time;
+var index;
 
 $(document).ready(function () {
     //globals
@@ -21,6 +28,11 @@ $(document).ready(function () {
     $elapsedTime = $("#elapsedTime");
     $remainingTime = $("#remainingTime");
     $seekBar = $("#seekBar");
+
+    $topLine = $("#topLine");
+    $middleLine = $("#middleLine");
+    $bottomLine = $("#bottomLine");
+
     $seekBar.val(0);
 
     //noinspection JSSuspiciousNameCombination
@@ -77,9 +89,18 @@ $(document).ready(function () {
                 });
 
                 getLyrics(metadata, function (result) {
+                    result.forEach(function (element, index) {
+                        timeIndex[index] = element.time;
+                    });
                     lyrics = result;
-                }, function () {
-                    alert("Error getting lyrics.");
+
+                    $topLine.text("Success.");
+                    $middleLine.text("Lyrics loaded.");
+                    $bottomLine.text("Press play!")
+                }, function (error) {
+                    $topLine.text("Error");
+                    $middleLine.text("Fetching lyrics.");
+                    $bottomLine.text(error);
                 });
 
             }, function (error) {
@@ -118,29 +139,41 @@ function audioEventEnded() {
     //reset elapsed time
     $elapsedTime.text(formatDuration(0));
     //reset remaining time
-    $remainingTime.text("-" + formatDuration($audio.duration));
+    $remainingTime.text("-" + formatDuration(this.duration));
     //reset lyrics
 }
 
 function audioEventPaused() {
     //show play button
     $("#playPause").attr("src", "/img/player_play.png");
+    //clearInterval(updateInterval);
 }
 
 function audioEventPlaying() {
     //show pause button
     $("#playPause").attr("src", "/img/player_pause.png");
+    time = round(this.currentTime, 2);
+    index = closestIndex(round(this.currentTime, 2), timeIndex);
+    //updateInterval = setInterval(updateLyrics, 10);
 }
 
 function audioEventUpdate() {
-    //TODO
     //update elapsed time
-    $elapsedTime.text(formatDuration($audio.currentTime));
+    $elapsedTime.text(formatDuration(this.currentTime));
     //update remaining time
-    $remainingTime.text("-" + formatDuration($audio.duration - $audio.currentTime));
+    $remainingTime.text("-" + formatDuration(this.duration - this.currentTime));
     //update seekbar
-    $seekBar.val($audio.currentTime);
-    //update lyrics
+    $seekBar.val(this.currentTime);
+
+    console.log("time = " + round(this.currentTime, 2));
+    index = closestIndex(round(this.currentTime, 2), timeIndex);
+    console.log("index = " + index);
+
+    if (index != -1) {
+        $topLine.text(lyrics[Math.max(0, index - 1)].text);
+        $middleLine.text(lyrics[index].text);
+        $bottomLine.text(lyrics[Math.min(index + 1, lyrics.length - 1)].text);
+    }
 }
 
 //media utils
@@ -163,4 +196,55 @@ function formatDuration(duration) {
     var hours = Math.floor(minutes / 60);
     minutes = Math.floor(minutes % 60);
     return hours + ':' + padLeft(minutes, 2) + ':' + padLeft(seconds, 2);
+}
+
+function round(number, decimals) {
+    return +(Math.round(number + "e+" + decimals) + "e-" + decimals);
+}
+
+function bSearch(source, val, low, high) {
+    if (source === '' || val === '' || low === '' || high === '') return -1;
+    var first = low;
+    var last = high;
+    var mid = 0;
+    var arr = source;
+
+    while (first < last) {
+        mid = Math.floor((first + last) / 2);
+
+        if (arr[mid] < val) first = mid + 1;
+        else last = mid;
+    }
+
+    if ((first < high) && (arr[first] === val)) return first;
+    else return -1;
+}
+
+function closest(val, arr) {
+    var value = val;
+    var tmp = arr.slice();
+    tmp.push(value);
+    tmp.sort(function (a, b) {
+        return a - b;
+    });
+
+    var elIndex = bSearch(tmp, val, 0, tmp.length);
+
+    var before = (tmp[elIndex - 1] != undefined) ? tmp[elIndex - 1] : undefined;
+    var after = (tmp[elIndex + 1] != undefined) ? tmp[elIndex + 1] : undefined;
+
+    if (!!before && !!after) {
+        return ((Math.abs(value - before) < Math.abs(after - value)) ? before : after);
+    }
+}
+
+function closestIndex(closestTo, arr) {
+
+    var closest = 0; //Get the highest number in arr in case it match nothing.
+
+    for (var i = 0; i < arr.length; i++) { //Loop the array
+        if (arr[i] <= closestTo && arr[i] > arr[closest]) closest = i; //Check if it's higher than your number, but lower than your closest value
+    }
+
+    return closest; // return the value
 }

@@ -5,7 +5,7 @@
     display: table-cell;
     vertical-align: middle;
 
-    background-image: url(../img/covers/nocover.png);
+    background-image: url(../img/nocover.png);
     background-size: 100%;
 }
 
@@ -20,7 +20,8 @@
     padding: 12px;
     background-color: rgba(128, 128, 128, 0.5);
     color: rgba(255, 255, 255, 0.8);
-    margin: 0 auto;
+    margin: 0 12px;
+    min-height: 1em;
 }
 
 #middleLine {
