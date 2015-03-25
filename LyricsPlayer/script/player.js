@@ -61,6 +61,11 @@ $(document).ready(function () {
 
     //get which song to load
     var param = location.search.split('filename=')[1];
+    if (param == null) {
+        $topLine.text("Welcome!");
+        $middleLine.text("Use 'Eject' button to open Music.");
+        $bottomLine.text("Lyrics will be downloaded.");
+    }
     console.log("file = " + decodeURIComponent(param));
 
     //get file
@@ -96,11 +101,11 @@ $(document).ready(function () {
 
                     $topLine.text("Success.");
                     $middleLine.text("Lyrics loaded.");
-                    $bottomLine.text("Press play!")
+                    $bottomLine.text("Press play!");
                 }, function (error) {
                     $topLine.text("Error");
                     $middleLine.text("Fetching lyrics.");
-                    $bottomLine.text(error);
+                    $bottomLine.text("No connection or no lyrics found.");
                 });
 
             }, function (error) {
@@ -165,9 +170,9 @@ function audioEventUpdate() {
     //update seekbar
     $seekBar.val(this.currentTime);
 
-    console.log("time = " + round(this.currentTime, 2));
+    //console.log("time = " + round(this.currentTime, 2));
     index = closestIndex(round(this.currentTime, 2), timeIndex);
-    console.log("index = " + index);
+    //console.log("index = " + index);
 
     if (index != -1) {
         $topLine.text(lyrics[Math.max(0, index - 1)].text);
