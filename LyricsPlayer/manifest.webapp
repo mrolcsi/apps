@@ -4,7 +4,7 @@
   "launch_path": "/player.html",
   "type": "privileged",
   "icons": {
-    "128": "/img/icon-128.png"
+    "128": "/img/icon-circle-128.png"
   },
   "permissions": {
     "device-storage:music": {"access": "readwrite"}
@@ -14,5 +14,6 @@
     "url": "http://github.com/mrolcsi"
   },
   "default_locale": "en",
-  "orientation": ["portrait"]
+  "orientation": ["portrait"],
+  "installs_allowed_from": ["https://marketplace.firefox.com"]
 }
