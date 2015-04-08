@@ -1,0 +1,16 @@
+{
+  "name": "StorageDemo",
+  "description": "Local/Session/Device storage demo",
+  "launch_path": "/index.html",
+  "type": "privileged",
+  "icons": {
+    "512": "/img/icon-512.png",
+    "128": "/img/icon-128.png"
+  },
+  "developer": {
+    "name": "Matusinka Roland",
+    "url": "http://github.com/mrolcsi"
+  },
+  "default_locale": "en",
+  "origin": "app://appspot.com"
+}

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+
+    <link rel="stylesheet" href="style/app.css">
+    <link rel="stylesheet" href="style/layout.css">
+    <link rel="stylesheet" href="style/headers.css">
+    <link rel="stylesheet" href="style/buttons.css">
+    <link rel="stylesheet" href="style/input_areas.css">
+    <link rel="stylesheet" href="style/icons.css">
+    <link rel="stylesheet" href="style/toolbars.css">
+
+    <script src="script/jquery-1.11.2.min.js"></script>
+    <script src="script/app.js"></script>
+    <script src="script/persona.js"></script>
+    <script src="script/auth.js"></script>
+
+    <title></title>
+</head>
+<body role="application">
+<section role="region" class="gaia-list fit scroll sticky">
+    <header>
+        <h1>Email Database</h1>
+    </header>
+
+    <article>
+        <header>New user</header>
+        <ul>
+            <li>
+                <p><input type="text" id="email" placeholder="Email"></p>
+            </li>
+            <li>
+                <p><input type="text" id="nick" placeholder="Nickname"></p>
+            </li>
+        </ul>
+    </article>
+</section>
+
+<footer>
+    <button class="recommend" id="btnSave">Save</button>
+    <button id="btnGet">Load</button>
+</footer>
+
+</body>
+</html>
