@@ -7,7 +7,10 @@
     "128": "/img/icon-circle-128.png"
   },
   "permissions": {
-    "device-storage:music": {"access": "readwrite"}
+    "device-storage:music": {
+      "description": "This application needs access to your Music in order to play them.",
+      "access": "readwrite"
+    }
   },
   "developer": {
     "name": "Matusinka Roland",
