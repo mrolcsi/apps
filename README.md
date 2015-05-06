@@ -8,7 +8,7 @@ A simple MP3 player with the capability of downloading lyrics in LRC format, and
 - Downloading lyrics from my "server" (see notes below)
 - Displaying synchronized lyrics ([LRC format][1])
 
-*You can download the app from the Firefox Marketplace [here][4]*
+*You can download the app from the Firefox Marketplace [here][4].*
 
 *Check out the [Android version][5] too!*
 
